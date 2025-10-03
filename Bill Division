@@ -1,0 +1,46 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Result
+{
+    public static void bonAppetit(List<int> bill, int k, int b)
+    {
+        int total = 0;
+
+        // Sum all items
+        foreach (int item in bill)
+        {
+            total += item;
+        }
+
+        // Anna's fair share (excluding the item she didn't eat)
+        int annaShare = (total - bill[k]) / 2;
+
+        if (b == annaShare)
+        {
+            Console.WriteLine("Bon Appetit");
+        }
+        else
+        {
+            Console.WriteLine(b - annaShare);
+        }
+    }
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        string[] firstMultipleInput = Console.ReadLine().TrimEnd().Split(' ');
+
+        int n = Convert.ToInt32(firstMultipleInput[0]);
+        int k = Convert.ToInt32(firstMultipleInput[1]);
+
+        List<int> bill = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(billTemp => Convert.ToInt32(billTemp)).ToList();
+
+        int b = Convert.ToInt32(Console.ReadLine().Trim());
+
+        Result.bonAppetit(bill, k, b);
+    }
+}
