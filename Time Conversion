@@ -1,0 +1,21 @@
+using System;
+
+class Result
+{
+    public static string timeConversion(string s)
+    {
+        // parse string to DateTime using built-in format
+        DateTime time = DateTime.ParseExact(s, "hh:mm:sstt", null);
+        return time.ToString("HH:mm:ss");  // convert to 24-hour format
+    }
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        string s = Console.ReadLine();
+        string result = Result.timeConversion(s);
+        Console.WriteLine(result);
+    }
+}
