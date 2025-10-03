@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Result
+{
+    public static void miniMaxSum(List<int> arr)
+    {
+        long total = 0;
+        foreach (int num in arr)
+        {
+            total += num;
+        }
+
+        long min = total - arr.Max();
+        long max = total - arr.Min();
+
+        Console.WriteLine(min + " " + max);
+    }
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        List<int> arr = Console.ReadLine().Trim().Split(' ').Select(int.Parse).ToList();
+        Result.miniMaxSum(arr);
+    }
+}
