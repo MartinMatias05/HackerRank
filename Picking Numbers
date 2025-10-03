@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+class Result
+{
+    public static int pickingNumbers(List<int> a)
+    {
+        // Count frequency of each number
+        Dictionary<int, int> freq = new Dictionary<int, int>();
+
+        foreach (int num in a)
+        {
+            if (freq.ContainsKey(num))
+                freq[num]++;
+            else
+                freq[num] = 1;
+        }
+
+        int maxLength = 0;
+
+        // Compare each number with its neighbor
+        foreach (var kv in freq)
+        {
+            int num = kv.Key;
+            int count = kv.Value;
+
+            // Include neighbor (num+1) if exists
+            int neighborCount = freq.ContainsKey(num + 1) ? freq[num + 1] : 0;
+
+            int length = count + neighborCount;
+
+            if (length > maxLength)
+                maxLength = length;
+        }
+
+        return maxLength;
+    }
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+
+        List<int> a = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(aTemp => Convert.ToInt32(aTemp)).ToList();
+
+        int result = Result.pickingNumbers(a);
+
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+    }
+}
