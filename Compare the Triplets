@@ -1,0 +1,35 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Result
+{
+    public static List<int> compareTriplets(List<int> a, List<int> b)
+    {
+        int scoreA = 0;
+        int scoreB = 0;
+
+        for (int i = 0; i < a.Count; i++)
+        {
+            if (a[i] > b[i])
+                scoreA++;
+            else if (a[i] < b[i])
+                scoreB++;
+        }
+
+        return new List<int> { scoreA, scoreB };
+    }
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        List<int> a = Console.ReadLine().Trim().Split(' ').Select(int.Parse).ToList();
+        List<int> b = Console.ReadLine().Trim().Split(' ').Select(int.Parse).ToList();
+
+        List<int> result = Result.compareTriplets(a, b);
+
+        Console.WriteLine(string.Join(" ", result));
+    }
+}
