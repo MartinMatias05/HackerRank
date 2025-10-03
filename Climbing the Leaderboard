@@ -1,0 +1,52 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+class Result
+{
+    public static List<int> climbingLeaderboard(List<int> ranked, List<int> player)
+    {
+        // Remove duplicates from ranked
+        List<int> uniqueScores = ranked.Distinct().ToList();
+        uniqueScores.Sort((a, b) => b.CompareTo(a)); // sort descending
+
+        List<int> result = new List<int>();
+        int index = uniqueScores.Count - 1; // start from lowest ranked
+
+        foreach (int score in player)
+        {
+            // Move up while player's score >= leaderboard score
+            while (index >= 0 && score >= uniqueScores[index])
+            {
+                index--;
+            }
+
+            // Rank is index+2 (because index is 0-based)
+            result.Add(index + 2);
+        }
+
+        return result;
+    }
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        int rankedCount = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> ranked = Console.ReadLine().TrimEnd().Split(' ').Select(int.Parse).ToList();
+
+        int playerCount = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> player = Console.ReadLine().TrimEnd().Split(' ').Select(int.Parse).ToList();
+
+        List<int> result = Result.climbingLeaderboard(ranked, player);
+
+        textWriter.WriteLine(String.Join("\n", result));
+
+        textWriter.Flush();
+        textWriter.Close();
+    }
+}
