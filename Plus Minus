@@ -1,0 +1,34 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Result
+{
+    public static void plusMinus(List<int> arr)
+    {
+        int n = arr.Count;
+        int pos = 0, neg = 0, zero = 0;
+
+        foreach (int num in arr)
+        {
+            if (num > 0) pos++;
+            else if (num < 0) neg++;
+            else zero++;
+        }
+
+        Console.WriteLine((pos / (double)n).ToString("F6"));
+        Console.WriteLine((neg / (double)n).ToString("F6"));
+        Console.WriteLine((zero / (double)n).ToString("F6"));
+    }
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        int n = Convert.ToInt32(Console.ReadLine().Trim());
+        List<int> arr = Console.ReadLine().Trim().Split(' ').Select(int.Parse).ToList();
+
+        Result.plusMinus(arr);
+    }
+}
