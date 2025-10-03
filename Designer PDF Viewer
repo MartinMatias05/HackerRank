@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+class Result
+{
+    public static int designerPdfViewer(List<int> h, string word)
+    {
+        int maxHeight = 0;
+
+        foreach (char c in word)
+        {
+            // Get the index of the letter (a=0, b=1, ..., z=25)
+            int index = c - 'a';
+
+            // Get the height of this letter
+            int height = h[index];
+
+            // Keep track of the tallest letter
+            if (height > maxHeight)
+                maxHeight = height;
+        }
+
+        // Area = tallest letter height * word length
+        return maxHeight * word.Length;
+    }
+}
+
+class Solution
+{
+    public static void Main(string[] args)
+    {
+        TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
+
+        List<int> h = Console.ReadLine().TrimEnd().Split(' ').ToList()
+                            .Select(hTemp => Convert.ToInt32(hTemp)).ToList();
+
+        string word = Console.ReadLine();
+
+        int result = Result.designerPdfViewer(h, word);
+
+        textWriter.WriteLine(result);
+
+        textWriter.Flush();
+        textWriter.Close();
+    }
+}
